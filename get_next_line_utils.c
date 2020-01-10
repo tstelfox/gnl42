@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 13:21:36 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/08 21:16:34 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/10 21:48:30 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (bruh);
 }
 
-size_t		ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t c;
 

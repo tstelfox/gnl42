@@ -6,17 +6,11 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 21:29:32 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/10 21:34:54 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/10 21:45:14 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int		fuckingmallocerror(char **line)
-{
-	free(*line);
-	return (-1);
-}
 
 int		newline(char *buff)
 {

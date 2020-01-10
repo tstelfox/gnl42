@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 15:50:51 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/08 21:22:04 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/10 21:47:39 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,11 @@
 # endif
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <strings.h>
 
-char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
-void	*ft_memcpy(void *dst, void *src, size_t n);
 size_t	ft_strlen(char *s);
 void	*ft_memmove(void *dst, void *src, size_t len);
-char	*ft_strchr(char *s, int c);
-char	*ft_strndup(char *s1, size_t len);
 char	*ft_strdup(char *s1);
 int		get_next_line(int fd, char **line);
-char	*ft_strdupnor(char *s1);
 #endif

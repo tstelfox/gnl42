@@ -6,11 +6,22 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 12:44:10 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/08 21:18:47 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/10 22:11:31 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		mfailexit(int ret, char **line)
+{
+	if (ret == -1)
+	{
+		free(*line);
+		return (-1);
+	}
+	else
+		return (1);
+}
 
 int		newline(char *buff)
 {
@@ -35,6 +46,8 @@ int		processbuff(char *buff, char **line)
 		*line = ft_strdup(buff);
 	else
 		*line = ft_strjoin(*line, buff);
+	if (*line == NULL)
+		return (-1);
 	if (buff[0] == '\n')
 	{
 		ft_memmove(buff, buff + 1, ft_strlen(buff));
@@ -45,55 +58,60 @@ int		processbuff(char *buff, char **line)
 	else
 	{
 		ft_memmove(buff, buff + (len + 1), ft_strlen(buff));
-		while ((ft_strlen(buff) - (len + 1) < ft_strlen(buff)))
-		{
-			buff[strlen(buff)] = '\0';
-			len--;
-		}
 		return (1);
 	}
 }
 
+int		remaining(char *buff, char **line)
+{
+	if (buff[0] == '\n')
+	{
+		*line = ft_strdup("");
+		ft_memmove(buff, buff + 1, ft_strlen(buff));
+		return (*line == 0 ? -1 : 1);
+	}
+	if (newline(buff))
+	{
+		if (!*line)
+		{
+			*line = ft_strdup(buff);
+			ft_memmove(buff, buff + (newline(buff) + 1),
+			ft_strlen(buff));
+			return (*line == 0 ? -1 : 1);
+		}
+		else
+		{
+			*line = ft_strjoin(*line, buff);
+			return (*line == 0 ? -1 : 1);
+		}
+	}
+	else
+		return ((*line = ft_strdup(buff)) ? 0 : -1);
+}
+
 int		get_next_line(int fd, char **line)
 {
-	static char	buff[BUFFER_SIZE + 1];
+	static char	buff[FD_MAX][BUFFER_SIZE + 1];
 	int			res;
+	int			ret;
 
 	*line = NULL;
 	res = 1;
-	if (*buff != '\0')
+	if (*buff[fd] != '\0')
 	{
-		if (buff[0] == '\n')
-		{
-			*line = ft_strdup("");
-			ft_memmove(buff, buff + 1, ft_strlen(buff));
-			return (1);
-		}
-		if (newline(buff))
-		{
-			if (!*line)
-			{
-				*line = ft_strdup(buff);
-				ft_memmove(buff, buff + (newline(buff) + 1), ft_strlen(buff));
-				return (1);
-			}
-			else
-			{
-				*line = ft_strjoin(*line, buff);
-				return (1);
-			}
-		}
-		else
-			*line = ft_strdup(buff);
+		ret = remaining(buff[fd], line);
+		if (ret != 0)
+			return (mfailexit(ret, line));
 	}
 	while (res)
 	{
-		res = read(fd, buff, BUFFER_SIZE);
-		if (res == -1)
+		res = read(fd, buff[fd], BUFFER_SIZE);
+		if (res == -1 || fd < 0)
 			return (-1);
-		buff[res] = '\0';
-		if (processbuff(buff, line))
-			return (1);
+		buff[fd][res] = '\0';
+		ret = processbuff(buff[fd], line);
+		if (ret != 0)
+			return (mfailexit(ret, line));
 	}
 	return (0);
 }
