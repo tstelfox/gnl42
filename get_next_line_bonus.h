@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 15:50:51 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/10 21:30:28 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/11 12:57:02 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # endif
 # include <stdlib.h>
 # include <unistd.h>
-# include <strings.h>
 
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(char *s);

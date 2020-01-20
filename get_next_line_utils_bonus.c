@@ -6,11 +6,11 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 21:29:06 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/10 21:48:38 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/11 16:49:44 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {

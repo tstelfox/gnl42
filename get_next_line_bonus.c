@@ -6,11 +6,22 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 21:29:32 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/10 21:45:14 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/15 17:13:10 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+
+int		mfailexit(int ret, char **line)
+{
+	if (ret == -1)
+	{
+		free(*line);
+		return (-1);
+	}
+	else
+		return (1);
+}
 
 int		newline(char *buff)
 {
@@ -75,7 +86,8 @@ int		remaining(char *buff, char **line)
 		}
 	}
 	else
-		return ((*line = ft_strdup(buff)) ? 0 : -1);
+		*line = ft_strdup(buff);
+	return (*line == 0 ? -1 : 0);
 }
 
 int		get_next_line(int fd, char **line)
@@ -90,7 +102,7 @@ int		get_next_line(int fd, char **line)
 	{
 		ret = remaining(buff[fd], line);
 		if (ret != 0)
-			return (ret);
+			return (mfailexit(ret, line));
 	}
 	while (res)
 	{
@@ -100,7 +112,7 @@ int		get_next_line(int fd, char **line)
 		buff[fd][res] = '\0';
 		ret = processbuff(buff[fd], line);
 		if (ret != 0)
-			return (ret);
+			return (mfailexit(ret, line));
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmullan <tmullan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 12:44:10 by tmullan        #+#    #+#                */
-/*   Updated: 2020/01/10 22:11:31 by tmullan       ########   odam.nl         */
+/*   Updated: 2020/01/15 17:13:05 by tmullan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int		remaining(char *buff, char **line)
 		}
 	}
 	else
-		return ((*line = ft_strdup(buff)) ? 0 : -1);
+		*line = ft_strdup(buff);
+	return (*line == 0 ? -1 : 0);
 }
 
 int		get_next_line(int fd, char **line)
